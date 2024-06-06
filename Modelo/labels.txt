@@ -1,0 +1,6 @@
+0 Casual men
+1 Casual women
+2 Formal men
+3 Formal women
+4 Sports men
+5 Sports women
