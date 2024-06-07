@@ -86,7 +86,7 @@ def generate_recipe(label):
 
 #st.set_page_config(layout='wide')
 
-logo_path = "logo.png"
+logo_path = "logo2.png"
 
 
 # Muestra el logo y el título juntos
