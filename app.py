@@ -148,16 +148,17 @@ if input_img is not None:
                 st.info("Posibles outfits")
                 #result = generate_recipe(label2)
                 #st.success(result)#
+                st.markdown(
+                    """
+                  <div class="btn-box">
+                  <a href="/Outfits" target="_self">
+                     <button style="background-color:#000000;color:white;padding:10px 20px;border:none;border-radius:5px;font-size:20px;">
+                       Ver Outfits Recomendados
+                        </button>
+                        </a>
+                       </div>
+                        """,
+                        unsafe_allow_html=True
+                        )
 
-st.markdown(
-    """
-    <div class="btn-box">
-        <a href="/Outfits" target="_self">
-            <button style="background-color:#000000;color:white;padding:10px 20px;border:none;border-radius:5px;font-size:20px;">
-                Ver Outfits Recomendados
-            </button>
-        </a>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+
