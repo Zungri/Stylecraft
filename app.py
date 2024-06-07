@@ -86,9 +86,13 @@ def generate_recipe(label):
 
 #st.set_page_config(layout='wide')
 
+logo_path = "logo.png"
 
 
-st.title("👗 Detector de Moda 👗")
+# Muestra el logo y el título juntos
+st.image(logo_path, width=300)
+
+
 
 st.subheader("""Cargá una foto de la prenda que quieras utilizar y determinaremos su estilo.👔""")
 st.subheader("""Nuestra avanzada tecnologia te asistira a preparar un outfit para tu ocasion especial🎩""")
@@ -97,7 +101,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-color: #5c70ad;
+        background-color: #27B1E9;
     }
     .title {
         font-size: 48px;
