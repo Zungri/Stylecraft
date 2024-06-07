@@ -86,8 +86,10 @@ def generate_recipe(label):
 
 #st.set_page_config(layout='wide')
 
-logo_path = "logo.png"
-
+logo_path = "img/logo.png"
+outfit1_path = "img/outfit1.jpeg"
+outfit2_path = "img/outfit2.jpeg"
+outfit3_path = "img/outfit.jpeg"
 
 # Muestra el logo y el título juntos
 st.image(logo_path, width=400)
@@ -98,7 +100,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-color: #27B1E9;
+        background-color: #000000;
     }
     .title {
         font-size: 48px;
@@ -113,6 +115,7 @@ st.markdown(
         font-size: 18px;
         color: #5d3a1a;
     }
+ 
     </style>
     """,
     unsafe_allow_html=True
@@ -142,5 +145,23 @@ if input_img is not None:
             
         with col3:
                 st.info("Posibles outfits")
-                result = generate_recipe(label2)
-                st.success(result)
+                #result = generate_recipe(label2)
+                #st.success(result)#
+
+
+# Sección de recomendados
+st.markdown("<h2 style='color: #ffffff;'>Outfits Recomendados</h2>", unsafe_allow_html=True)
+st.markdown("<div class='recommended-container'>", unsafe_allow_html=True)
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.image(outfit1_path, use_column_width=True,)
+
+with col2:
+    st.image(outfit2_path, use_column_width=True,)
+
+with col3:
+    st.image(outfit3_path,width=200,)
+
+# Cerrar el contenedor del fondo azul oscuro
+st.markdown("</div>", unsafe_allow_html=True)
