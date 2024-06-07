@@ -92,8 +92,6 @@ logo_path = "logo.png"
 # Muestra el logo y el título juntos
 st.image(logo_path, width=300)
 
-
-
 st.subheader("""Cargá una foto de la prenda que quieras utilizar y determinaremos su estilo.👔""")
 st.subheader("""Nuestra avanzada tecnologia te asistira a preparar un outfit para tu ocasion especial🎩""")
 input_img = st.file_uploader("Elegir imagen", type=['jpg', 'png', 'jpeg'])
