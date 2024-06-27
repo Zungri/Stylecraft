@@ -193,6 +193,8 @@ if input_img is not None:
             else:
                 st.info("No se encontraron outfits recomendados para este estilo.")
 
+st.write("")
+st.write("")
 # Create three columns
 col1, col2, col3 = st.columns(3)
 
