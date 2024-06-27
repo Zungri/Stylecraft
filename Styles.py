@@ -7,6 +7,13 @@ from openai import OpenAI
 import os
 import streamlit as st
 
+st.set_page_config(
+    page_title="Asistente de Moda",
+    page_icon="👔",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 # Get the absolute path to the directory containing the script
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -56,7 +63,7 @@ def classify_fruit(img):
 
     # Print prediction and confidence score
     # print("Class:", class_name[2:], end="")
-    # print("Confidence Score:", confidence_score)
+    #print("Confidence Score:", confidence_score)
 
     return class_name, confidence_score
 
@@ -140,8 +147,12 @@ if input_img is not None:
                 # Extraer el nombre de la etiqueta sin el número
                 label_description = label.split(maxsplit=1)[1]  # Divide la etiqueta por el primer espacio y toma el segundo elemento
                 label2 = label_description  # Guarda la descripción en label2
+                
 
-                st.success(label2)  # Muestra la etiqueta sin el número
+            st.success(f"Estilo: {label2}")  # Muestra la etiqueta sin el número
+            if confidence_score < 0.80:
+                    st.warning(f"No comprendo esta imagen, carga mas imagenes para poder ayudarte.")  # Muestra el confidence score con 2 decimales de precisión
+            
 
             
         with col3:
@@ -151,7 +162,7 @@ if input_img is not None:
                 st.markdown(
                     """
                   <div class="btn-box">
-                  <a href="/Outfits" target="_self">
+                  <a href="/Casual" target="_self">
                      <button style="background-color:#000000;color:white;padding:10px 20px;border:none;border-radius:5px;font-size:20px;">
                        Ver Outfits Recomendados
                         </button>
@@ -161,4 +172,69 @@ if input_img is not None:
                         unsafe_allow_html=True
                         )
 
+st.markdown("---")
+tab1, tab2, tab3 = st.tabs(["Quiénes Somos", "Contacto", "Novedades"])
 
+with tab1:
+    st.header("Quiénes Somos")
+    st.write("""
+    Somos un equipo apasionado por la moda y la tecnología. Nuestra misión es hacer que 
+    la elección de outfits sea más fácil y divertida para todos, combinando inteligencia 
+    artificial con las últimas tendencias de la moda.
+
+    Nuestro equipo está formado por:
+    - Expertos en moda
+    - Ingenieros de IA
+    - Diseñadores de UX/UI
+    
+    Juntos, trabajamos para brindarte la mejor experiencia en asesoramiento de moda personalizado.
+    """)
+
+with tab2:
+    st.header("Contacto")
+    st.write("""
+    ¿Tienes preguntas o sugerencias? ¡Nos encantaría escucharte!
+    
+    📧 Email: contacto@asistente-moda.com
+    📱 Teléfono: +1 (555) 123-4567
+    🌐 Sitio web: www.asistente-moda.com
+    
+    Síguenos en redes sociales:
+    - Instagram: @asistente_moda
+    - Twitter: @AsistenteModa
+    - Facebook: /AsistenteDeModa
+    """)
+    
+    # Formulario de contacto simple
+    with st.form("formulario_contacto"):
+        st.write("Formulario de Contacto")
+        nombre = st.text_input("Nombre")
+        email = st.text_input("Email")
+        mensaje = st.text_area("Mensaje")
+        submitted = st.form_submit_button("Enviar")
+        if submitted:
+            st.success("¡Gracias por tu mensaje! Te responderemos pronto.")
+
+with tab3:
+    st.header("Novedades")
+    st.write("""
+    ¡Mantente al día con las últimas actualizaciones de nuestro Asistente de Moda!
+    
+    🆕 Próximas Funcionalidades:
+    - Reconocimiento de colores para mejor combinación
+    - Integración con tiendas online para compras directas
+    - Función de guardarropa virtual
+    
+    🎉 Eventos:
+    - Webinar: "Tendencias de Moda 2024" - 15 de Julio
+    - Lanzamiento de nuestra app móvil - Próximamente
+    
+    📰 Blog:
+    - "5 Tips para Combinar Colores en tu Outfit"
+    - "Cómo Vestir para Diferentes Ocasiones"
+    - "Moda Sostenible: Tendencias y Consejos"
+    """)
+
+# Pie de página
+st.markdown("---")
+st.write("Desarrollado con ❤ por Tu Equipo")
