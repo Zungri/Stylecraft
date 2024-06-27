@@ -1,18 +1,28 @@
+import base64
 from keras.models import load_model  # TensorFlow is required for Keras to work
 from PIL import Image, ImageOps  # Install pillow instead of PIL
 import numpy as np
 import streamlit as st 
 from openai import OpenAI
-
 import os
-import streamlit as st
 
 st.set_page_config(
     page_title="Asistente de Moda",
     page_icon="👔",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
+
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            .css-1d391kg {display: none;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
 
 # Get the absolute path to the directory containing the script
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -22,7 +32,6 @@ directory_files = os.listdir(script_dir)
 
 
 def classify_fruit(img):
-
     # Disable scientific notation for clarity
     np.set_printoptions(suppress=True)
 
@@ -35,8 +44,6 @@ def classify_fruit(img):
     class_names = open(labels_path, "r").readlines()
 
     # Create the array of the right shape to feed into the keras model
-    # The 'length' or number of images you can put into the array is
-    # determined by the first position in the shape tuple, in this case 1
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
     # Replace this with the path to your image
@@ -58,53 +65,40 @@ def classify_fruit(img):
     # Predicts the model
     prediction = model.predict(data)
     index = np.argmax(prediction)
-    class_name = class_names[index]
+    class_name = class_names[index].strip()
     confidence_score = prediction[0][index]
-
-    # Print prediction and confidence score
-    # print("Class:", class_name[2:], end="")
-    #print("Confidence Score:", confidence_score)
 
     return class_name, confidence_score
 
 
+
+                # Extraer el nombre de la etiqueta sin el número
+
+
+
 def generate_recipe(label):
-
-
     client = OpenAI(api_key="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")
-
-    
-
     response = client.completions.create(
-    model="gpt-3.5-turbo-instruct",
-    prompt= f"sos un experto en moda y tenes que recomendar a la persona que publique la imagen de una prenda como combinarla dependiendo de el estilo de la ropa que se clasifica como {label} brindale 3 formas de combinar esa prenda teniendo en cuenta su estilo",
-    temperature=0.5,
-    max_tokens=300,
-    top_p=1,
-    frequency_penalty=0,
-    presence_penalty=0
+        model="gpt-3.5-turbo-instruct",
+        prompt=f"sos un experto en moda y tenes que recomendar a la persona que publique la imagen de una prenda como combinarla dependiendo de el estilo de la ropa que se clasifica como {label} brindale 3 formas de combinar esa prenda teniendo en cuenta su estilo",
+        temperature=0.5,
+        max_tokens=300,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
     )
-
     return response.choices[0].text
 
 
-
-# Streamlit App
-
-#st.set_page_config(layout='wide')
-
 logo_path = "img/logo.png"
-
 
 # Muestra el logo y el título juntos
 st.image(logo_path, width=400)
-st.subheader("""Cargá una foto de la prenda que quieras utilizar y determinaremos su estilo.👔""")
-st.subheader("""Nuestra avanzada tecnologia te asistira a preparar un outfit para tu ocasion especial🎩""")
+st.subheader("""Carga una imagen utilizando tu outfit o el outfit que desees,""")
+st.subheader("""Nuestra avanzada tecnología te recomendará cómo utilizar outfits de ese estilo y proporcionará ofertas imperdibles de marcas reconocidas.""")
 input_img = st.file_uploader("Elegir imagen", type=['jpg', 'png', 'jpeg'])
-# Botón para navegar a la página de outfits recomendados
-# Botón para navegar a la página de outfits recomendados
 
-
+ 
 st.markdown(
     """
     <style>
@@ -128,6 +122,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 if input_img is not None:
     if st.button("Determinar estilo de moda"):
         
@@ -146,36 +141,63 @@ if input_img is not None:
 
                 # Extraer el nombre de la etiqueta sin el número
                 label_description = label.split(maxsplit=1)[1]  # Divide la etiqueta por el primer espacio y toma el segundo elemento
-                label2 = label_description  # Guarda la descripción en label2
-                
+                label2 = label_description.strip()  # Guarda la descripción en label2
 
             st.success(f"Estilo: {label2}")  # Muestra la etiqueta sin el número
             if confidence_score < 0.80:
-                    st.warning(f"No comprendo esta imagen, carga mas imagenes para poder ayudarte.")  # Muestra el confidence score con 2 decimales de precisión
-            
+                st.warning(f"No comprendo esta imagen, carga más imágenes para poder ayudarte.")  # Muestra el confidence score con 2 decimales de precisión
 
-            
         with col3:
-                st.info("Posibles outfits")
-                #result = generate_recipe(label2)
-                #st.success(result)#
+            if label2 in ["Casual men", "Casual women"]:
+                st.info("Outfits Casuales")
                 st.markdown(
                     """
-                  <div class="btn-box">
-                  <a href="/Casual" target="_self">
-                     <button style="background-color:#000000;color:white;padding:10px 20px;border:none;border-radius:5px;font-size:20px;">
-                       Ver Outfits Recomendados
+                    <div class="btn-box">
+                    <a href="/Casual" target="_self">
+                        <button style="background-color:#000000;color:white;padding:10px 20px;border:none;border-radius:5px;font-size:20px;">
+                        Ver recomendaciones
                         </button>
-                        </a>
-                       </div>
-                        """,
-                        unsafe_allow_html=True
-                        )
+                    </a>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            elif label2 in ["Formal men", "Formal women"]:
+                st.info("Outfits Formales")
+                st.markdown(
+                    """
+                    <div class="btn-box">
+                    <a href="/Formal" target="_self">
+                        <button style="background-color:#000000;color:white;padding:10px 20px;border:none;border-radius:5px;font-size:20px;">
+                        Ver recomendaciones
+                        </button>
+                    </a>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            elif label2 in ["Sports men", "Sports women"]:
+                st.info("Outfits Deportivos")
+                st.markdown(
+                    """
+                    <div class="btn-box">
+                    <a href="/Sports" target="_self">
+                        <button style="background-color:#000000;color:white;padding:10px 20px;border:none;border-radius:5px;font-size:20px;">
+                        Ver recomendaciones
+                        </button>
+                    </a>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            else:
+                st.info("No se encontraron outfits recomendados para este estilo.")
 
-st.markdown("---")
-tab1, tab2, tab3 = st.tabs(["Quiénes Somos", "Contacto", "Novedades"])
+# Create three columns
+col1, col2, col3 = st.columns(3)
 
-with tab1:
+# Content for the first column ("Quiénes Somos")
+with col1:
     st.header("Quiénes Somos")
     st.write("""
     Somos un equipo apasionado por la moda y la tecnología. Nuestra misión es hacer que 
@@ -190,7 +212,8 @@ with tab1:
     Juntos, trabajamos para brindarte la mejor experiencia en asesoramiento de moda personalizado.
     """)
 
-with tab2:
+# Content for the second column ("Contacto")
+with col2:
     st.header("Contacto")
     st.write("""
     ¿Tienes preguntas o sugerencias? ¡Nos encantaría escucharte!
@@ -215,7 +238,8 @@ with tab2:
         if submitted:
             st.success("¡Gracias por tu mensaje! Te responderemos pronto.")
 
-with tab3:
+# Content for the third column ("Novedades")
+with col3:
     st.header("Novedades")
     st.write("""
     ¡Mantente al día con las últimas actualizaciones de nuestro Asistente de Moda!
@@ -235,6 +259,37 @@ with tab3:
     - "Moda Sostenible: Tendencias y Consejos"
     """)
 
-# Pie de página
-st.markdown("---")
-st.write("Desarrollado con ❤ por Tu Equipo")
+# Define the path to your image
+image_path = "img/fondo2.jpeg"
+
+# Check if the image exists
+if not os.path.exists(image_path):
+    st.error(f"La imagen no se encuentra en la ruta: {image_path}")
+else:
+    # Function to convert an image file to a base64 string
+    def get_base64_image(image_path):
+        with open(image_path, "rb") as image_file:
+            base64_image = base64.b64encode(image_file.read()).decode()
+        return base64_image
+
+    # Convert the local image to a base64 string
+    base64_image = get_base64_image(image_path)
+    
+    # CSS to set the background image
+    st.markdown(
+        f"""
+        <style>
+        body {{
+            background-image: url("data:image/png;base64,{base64_image}");
+            background-size: cover;       /* Cover the entire page */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-attachment: fixed; /* Make sure the background image stays fixed when scrolling */
+            background-position: center;  /* Center the image */
+        }}
+        .stApp {{
+            background: rgba(125, 125, 125, 0.01); /* Semi-transparent background for content */
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )

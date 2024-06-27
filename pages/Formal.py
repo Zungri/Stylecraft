@@ -11,9 +11,9 @@ st.set_page_config(
 )
 
 # Cargar las imágenes
-image1 = Image.open("img/outfit3.png")
-image2 = Image.open("img/outfit4.png")
-image3 = Image.open("img/outfit2.png")
+image1 = Image.open("img/formal.png")
+image2 = Image.open("img/formal1.png")
+image3 = Image.open("img/formal2.png")
 
 
 
@@ -28,26 +28,26 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 # Título de la página
-st.title("Casual")
+st.title("Formal")
 
-# Lista de consejos para armar un outfit casual
-st.header("Consejos para armar un outfit casual")
+# Lista de consejos para armar un outfit 
+st.header("Consejos para armar un outfit Formal")
 st.write("""
-1. *Comodidad ante todo*: Elige prendas que te resulten cómodas y que te permitan moverte con facilidad.
-2. *Colores neutros*: Los colores como el blanco, negro, gris y azul son fáciles de combinar y siempre se ven bien.
-3. *Capas*: Añadir capas como chaquetas ligeras o cardigans puede darle un toque extra a tu atuendo y es práctico para cambios de temperatura.
-4. *Accesorios*: Utiliza accesorios como relojes, pulseras o sombreros para personalizar tu look y darle un toque distintivo.
-5. *Calzado adecuado*: Opta por zapatos cómodos y versátiles, como zapatillas blancas o botines, que complementen tu estilo sin sacrificar la comodidad.
+1. *Elige un traje de buena calidad*: Invierte en un traje bien hecho, preferiblemente en colores clásicos como negro, azul marino o gris.
+2. *Camisas*: Opta por camisas de colores claros como blanco o azul claro para una apariencia limpia y elegante.
+3. *Corbata adecuada*: La corbata debe complementar el traje y la camisa. Evita patrones demasiado llamativos.
+4. *Zapatos formales*: Un buen par de zapatos de vestir, preferiblemente en negro o marrón oscuro, es esencial.
+5. *Accesorios discretos*: Utiliza accesorios como un buen reloj, gemelos y un pañuelo de bolsillo para agregar un toque de sofisticación sin exagerar.
 """)
-# Enlaces a tiendas de ropa casual
+# Enlaces a tiendas de ropa 
 st.header("Ofertas imperdibles")
 st.write("""
-- [H&M](https://www2.hm.com/)
-- [Zara](https://www.zara.com/)
-- [Uniqlo](https://www.uniqlo.com/)
-- [ASOS](https://www.asos.com/)
-- [Mango](https://shop.mango.com/)
-- [Levi's](https://www.levi.com/)
+- [Hugo Boss](https://www.hugoboss.com/)
+- [Armani](https://www.armani.com/)
+- [Brooks Brothers](https://www.brooksbrothers.com/)
+- [Ralph Lauren](https://www.ralphlauren.com/)
+- [Tom Ford](https://www.tomford.com/)
+- [Burberry](https://www.burberry.com/)
 """)
 
 # Mostrar las imágenes

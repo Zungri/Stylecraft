@@ -4,50 +4,47 @@ import streamlit as st
 from PIL import Image
 
 st.set_page_config(
-    page_title="Asistente de Moda",
-    page_icon="👔",
+    page_title="Asistente de Moda Deportiva",
+    page_icon="👟",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
 # Cargar las imágenes
-image1 = Image.open("img/outfit3.png")
-image2 = Image.open("img/outfit4.png")
-image3 = Image.open("img/outfit2.png")
-
-
+image1 = Image.open("img/sport1.png")
+image2 = Image.open("img/sport2.png")
+image3 = Image.open("img/sport3.png")
 
 # Ocultar el menú de Streamlit y el pie de página
 hide_streamlit_style = """
         <style>
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
-
         </style>
         """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 # Título de la página
-st.title("Casual")
+st.title("Outfits Deportivos")
 
-# Lista de consejos para armar un outfit casual
-st.header("Consejos para armar un outfit casual")
+# Lista de consejos para armar un outfit deportivo
+st.header("Consejos para armar un outfit deportivo")
 st.write("""
-1. *Comodidad ante todo*: Elige prendas que te resulten cómodas y que te permitan moverte con facilidad.
-2. *Colores neutros*: Los colores como el blanco, negro, gris y azul son fáciles de combinar y siempre se ven bien.
-3. *Capas*: Añadir capas como chaquetas ligeras o cardigans puede darle un toque extra a tu atuendo y es práctico para cambios de temperatura.
-4. *Accesorios*: Utiliza accesorios como relojes, pulseras o sombreros para personalizar tu look y darle un toque distintivo.
-5. *Calzado adecuado*: Opta por zapatos cómodos y versátiles, como zapatillas blancas o botines, que complementen tu estilo sin sacrificar la comodidad.
+1. *Ropa adecuada para el deporte*: Elige ropa específica para el deporte que practicas, ya sea correr, gimnasio, yoga, etc.
+2. *Material transpirable*: Opta por prendas hechas de materiales transpirables que absorban el sudor.
+3. *Calzado apropiado*: Usa zapatos que brinden el soporte necesario según la actividad deportiva.
+4. *Ropa cómoda*: Asegúrate de que la ropa te quede bien y te permita moverte con libertad.
+5. *Capas según el clima*: Viste en capas para poder ajustarte a las condiciones climáticas, especialmente si haces deporte al aire libre.
 """)
-# Enlaces a tiendas de ropa casual
+# Enlaces a tiendas de ropa deportiva
 st.header("Ofertas imperdibles")
 st.write("""
-- [H&M](https://www2.hm.com/)
-- [Zara](https://www.zara.com/)
-- [Uniqlo](https://www.uniqlo.com/)
-- [ASOS](https://www.asos.com/)
-- [Mango](https://shop.mango.com/)
-- [Levi's](https://www.levi.com/)
+- [Nike](https://www.nike.com/)
+- [Adidas](https://www.adidas.com/)
+- [Under Armour](https://www.underarmour.com/)
+- [Reebok](https://www.reebok.com/)
+- [Puma](https://www.puma.com/)
+- [Lululemon](https://www.lululemon.com/)
 """)
 
 # Mostrar las imágenes
