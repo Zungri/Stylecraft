@@ -31,7 +31,7 @@ st.markdown("""
         text-align: center;
         font-size: 48px;
         font-family: 'Helvetica Neue', sans-serif;
-        color: #f0f0f0;
+        color: #000000;
         margin-bottom: 20px;
     }
 </style>
@@ -45,13 +45,13 @@ st.markdown("""
         text-align: center;
         font-size: 36px;
         font-family: 'Helvetica Neue', sans-serif;
-        color: #555;
+        color: #000000;
         margin-bottom: 20px;
     }
     .tips {
         font-size: 20px;
         font-family: 'Helvetica Neue', sans-serif;
-        color: #555;
+        color: #000000;
         line-height: 1.6;
         margin: 20px 0;
     }
@@ -79,7 +79,7 @@ st.markdown("""
         text-align: center;
         font-size: 36px;
         font-family: 'Helvetica Neue', sans-serif;
-        color: #555;
+        color: #000000;
         margin-bottom: 20px;
     }
 </style>
@@ -98,7 +98,7 @@ with col3:
     st.image(image3, width=350)
 
 # Define the path to your image
-image_path = "img/fondonegro.jpeg"
+image_path = "img/fondoblanco.jpg"
 
 # Check if the image exists
 if not os.path.exists(image_path):
@@ -179,7 +179,7 @@ else:
             text-align: center;
             font-size: 22px;
             font-family: 'Helvetica Neue', sans-serif;
-            color: #555;
+            color: #000000;
             margin: 20px 0;
         }}
         </style>
@@ -271,7 +271,7 @@ st.markdown("""
         text-align: center;
         font-size: 14px;
         font-family: 'Helvetica Neue', sans-serif;
-        color: #888;
+        color: #000000;
         margin-top: 50px;
     }
 </style>

@@ -103,20 +103,20 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-color: #0f3999;
+        background-color: #FFFFFF;
     }
     .title {
         font-size: 48px;
         font-weight: bold;
-        color: #5d3a1a;
+        color: #000000;
     }
     .subtitle {
         font-size: 24px;
-        color: #5d3a1a;
+        color: #000000;
     }
     .info-box {
         font-size: 18px;
-        color: #5d3a1a;
+        color: #000000;
     }
     </style>
     """,
@@ -262,7 +262,7 @@ with col3:
     """)
 
 # Define the path to your image
-image_path = "img/fondo2.jpeg"
+image_path = "img/fondoblanco.jpg"
 
 # Check if the image exists
 if not os.path.exists(image_path):
