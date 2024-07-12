@@ -275,5 +275,4 @@ st.markdown("""
         margin-top: 50px;
     }
 </style>
-<div class="footer">Desarrollado por [Tu Nombre o Marca]</div>
 """, unsafe_allow_html=True)
